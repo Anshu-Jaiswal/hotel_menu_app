@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_menu_app/model/item.dart';
-import 'package:hotel_menu_app/order_list_page.dart';
 import 'package:hotel_menu_app/providers/item_provider.dart';
+import 'package:hotel_menu_app/splash_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -16,7 +16,12 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ItemProvider(allItems),
       child: MaterialApp(
-        home: OrderListPage(),
+        home: SplashPage(),
+        builder: (context, child) {
+          return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+              child: SafeArea(child: child!));
+        },
       ),
     );
   }
