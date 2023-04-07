@@ -5,40 +5,25 @@ import 'package:provider/provider.dart';
 import 'model/item.dart';
 import 'order_confirm_page.dart';
 
-class OrderListPage extends StatelessWidget {
+class OrderListPage extends StatefulWidget {
   const OrderListPage({Key? key}) : super(key: key);
-  Future<bool> _onWillPop(BuildContext context) async {
-    return (await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Are you sure?'),
-            content: Text('Do you want to exit the App'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: Text('No'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: Text('Yes'),
-              ),
-            ],
-          ),
-        )) ??
-        false;
-  }
 
+  @override
+  State<OrderListPage> createState() => _OrderListPageState();
+}
+
+class _OrderListPageState extends State<OrderListPage> {
   @override
   Widget build(BuildContext context) {
     final list = context.read<ItemProvider>().list;
     return WillPopScope(
-      onWillPop: () => Future.value(_onWillPop(context)),
+      onWillPop: _onWillPop,
       child: Scaffold(
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.blueGrey.shade100,
         appBar: AppBar(),
         body: Stack(
           children: [
-            ListView.builder(
+            ListView.separated(
               itemCount: list.length,
               itemBuilder: (context, index) {
                 var item = list[index];
@@ -46,6 +31,9 @@ class OrderListPage extends StatelessWidget {
                   title: Text(item.name),
                   trailing: _UpdateOrderWidget(item),
                 );
+              },
+              separatorBuilder: (context, index) {
+                return Divider();
               },
             ),
             Positioned.fill(
@@ -75,6 +63,27 @@ class OrderListPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit the App'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text('Yes'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
   }
 }
 
