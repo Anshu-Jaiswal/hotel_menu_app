@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_menu_app/constants.dart';
 import 'package:hotel_menu_app/order_list_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
     return Container(
       color: Colors.amber.shade200,
       child: Center(
-        child: Image.asset("assets/images/logo.png"),
+        child: Image.asset(ASSET_LOGO_IMG),
       ),
     );
   }
