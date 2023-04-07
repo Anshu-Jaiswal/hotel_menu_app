@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
     return Container(
       color: Colors.amber.shade200,
       child: Center(
-        child: Image.asset("assets/logo.png"),
+        child: Image.asset("assets/images/logo.png"),
       ),
     );
   }
