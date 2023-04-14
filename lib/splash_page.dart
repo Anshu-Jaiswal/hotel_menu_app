@@ -13,7 +13,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 4)).whenComplete(() {
+    Future.delayed(Duration(seconds: 2)).whenComplete(() {
       Navigator.pushReplacement(context, MaterialPageRoute(
         builder: (context) {
           return OrderListPage();
@@ -25,9 +25,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.amber.shade200,
+      color: Color(0xFF93A5CF),
       child: Center(
-        child: Image.asset(ASSET_LOGO_IMG),
+        child: Image.asset(ASSET_LOGO_IMG, color: Colors.white),
       ),
     );
   }
